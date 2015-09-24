@@ -1,5 +1,5 @@
 ## open-mininet
-Open source Go implementation of [mininet](http://mininet.org/) and openflow controller examples.
+Open source Go implementation of [mininet](http://mininet.org/) and [openflow](https://www.opennetworking.org/Openflow) controller examples.
 
 #### Features
 - Creating network topology from **hosts** and **switches**
