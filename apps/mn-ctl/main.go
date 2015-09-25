@@ -374,7 +374,7 @@ func main() {
 
 			if commands[1] == "switches" {
 				for _, node := range scheme.Switches {
-					fmt.Println(node.NodeName)
+					fmt.Println(node.NodeName())
 				}
 			}
 		}
