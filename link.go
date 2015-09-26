@@ -279,6 +279,11 @@ func (this Link) SetNodeName(n Node) Link {
 }
 
 func (this Link) SetNetNs(n Node) Link {
+	if this.NetNs == "root" {
+		this.NetNs = ""
+		return this
+	}
+
 	if this.NetNs == "" && n.NetNs() != nil {
 		this.NetNs = n.NetNs().Name()
 	}

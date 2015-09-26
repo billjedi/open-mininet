@@ -35,8 +35,8 @@ Commands:
 
                 E.g.:
                     new link switch1, host1
-                Control interface for switch:
-                    new link switch1 host1 {"Cidr":"noip", "Name":"ctrl0"} {"Cidr":"192.168.55.200/24", "Name":"ctrl1"}
+                Control interface:
+                    new link switch1 host1 {"Cidr":"noip","Name":"ctrl0"} {"Cidr":"192.168.55.200/24","Name":"ctrl1","NetNs":"root"}
 
   new router [name]     Create router, same as host, but with forwarding enabled
   dump                  Dump as a plain text
@@ -145,7 +145,7 @@ func newNode(commands ...string) {
 
 		node2, found := scheme.GetNode(n2)
 		if !found {
-			log.Println("No such node:", n1, "create it first")
+			log.Println("No such node:", n2, "create it first")
 			return
 		}
 
@@ -281,13 +281,13 @@ func main() {
 		return
 	})
 
-	if f, err := os.OpenFile(history_fn, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644); err == nil {
+	if f, err := os.OpenFile(history_fn, os.O_RDONLY, 0644); err == nil {
 		line.ReadHistory(f)
 		f.Close()
 	}
 
 	defer func() {
-		if f, err := os.Create(history_fn); err == nil {
+		if f, err := os.OpenFile(history_fn, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644); err == nil {
 			line.WriteHistory(f)
 			f.Close()
 		}
